@@ -141,7 +141,7 @@ We validated the automated judge against a double-annotated human expert subset 
 | **Simple Baseline** (TF-IDF + BM25 + Keyword Escalation) | 0.750 | 0.704 | 0.705 | 0.253 | 0.855 (85.5% Missed) | 2.19 | 2.00 |
 | **Production AI Agent** (Hybrid RAG + Multi-Factor Escalation) | **0.815** | **0.829** | **0.785** | **0.650** | **0.420** (**42.0% Missed**) | **2.32** | **2.00** |
 
-*(Note: Benchmark table reflects the deterministic offline reproducible evaluation mode running locally in ~2 seconds with zero API keys. When live LLM generation is optionally enabled via `USE_LIVE_LLM_API=true` per `.env.example`, generation scores reach 2.50 Overall / 2.52 Groundedness).*
+*(Note: Benchmark table reflects the deterministic offline reproducible evaluation mode running locally in ~2 seconds with zero API keys — the only mode used for headline results, chosen to guarantee reproducibility without free-tier LLM API rate-limit variance.)*
 
 ### 4.2 Per-Intent Performance (Production Agent)
 
@@ -168,7 +168,7 @@ We validated the automated judge against a double-annotated human expert subset 
 - **Mean Absolute Error (MAE):** `0.369` on a 3.0 scale.
 - **Agreement within $\pm 0.5$ points:** `85.0%`.
 - **Exact Agreement:** `15.0%`.  
-*(Note: Reflects deterministic offline mode; live LLM mode reaches $r = 0.8371$ / MAE = 0.376).*
+*(Reflects the deterministic offline evaluation mode — the only mode used for headline results, chosen to guarantee reproducibility without free-tier LLM API rate-limit variance).*
 
 ---
 

@@ -87,7 +87,7 @@ Evaluated on the **200-example hand-labelled Golden Evaluation Set** (88.0% mult
 | **Simple Baseline** (TF-IDF + BM25) | 0.750 | 0.704 | 0.705 | 0.253 | 0.855 (85.5% Missed) | 2.19 | 2.00 |
 | **Production AI Agent** (Hybrid RAG) | **0.815** | **0.829** | **0.785** | **0.650** | **0.420** (**42.0% Missed**) | **2.32** | **2.00** |
 
-*(Note: Benchmark results reflect the deterministic offline reproducible evaluation mode running locally in ~2 seconds with zero external API keys. When live LLM generation is optionally enabled via `USE_LIVE_LLM_API=true` per `.env.example`, generation scores reach 2.50 Overall / 2.52 Groundedness / $r = 0.8371$).*
+*(Note: Offline deterministic mode was chosen as the primary/only path to guarantee reproducibility without free-tier API rate-limit variance.*
 
 ### Escalation Performance Highlights:
 - **Human Escalation Recall:** **58.0%** (catches 40 out of 69 critical account security, damaged shipment, or customer churn risks).
