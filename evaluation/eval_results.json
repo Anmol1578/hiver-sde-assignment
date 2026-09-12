@@ -1,0 +1,201 @@
+{
+  "metadata": {
+    "dataset": "Customer Support on Twitter (twcs)",
+    "brand": "AmazonHelp",
+    "golden_set_size": 200,
+    "multi_turn_ratio": 0.88,
+    "execution_time_seconds": 1.35
+  },
+  "baselines_comparison": {
+    "trivial_baseline": {
+      "intent_accuracy": 0.255,
+      "intent_macro_f1": 0.0508,
+      "escalation_accuracy": 0.655,
+      "escalation_f1": 0.0,
+      "unnecessary_escalation_rate": 0.0,
+      "missed_escalation_risk_rate": 1.0,
+      "judge_overall_mean": 1.534,
+      "judge_groundedness": 2.0,
+      "judge_correctness": 1.0,
+      "judge_helpfulness": 1.0,
+      "judge_escalation": 2.138
+    },
+    "simple_baseline": {
+      "intent_accuracy": 0.75,
+      "intent_macro_f1": 0.7035,
+      "escalation_accuracy": 0.705,
+      "escalation_f1": 0.2532,
+      "unnecessary_escalation_rate": 0.0,
+      "missed_escalation_risk_rate": 0.8551,
+      "judge_overall_mean": 2.186,
+      "judge_groundedness": 2.0,
+      "judge_correctness": 1.48,
+      "judge_helpfulness": 3.0,
+      "judge_escalation": 2.263
+    },
+    "production_agent": {
+      "intent_accuracy": 0.815,
+      "intent_macro_f1": 0.8293,
+      "escalation_accuracy": 0.785,
+      "escalation_f1": 0.6504,
+      "unnecessary_escalation_rate": 0.1069,
+      "missed_escalation_risk_rate": 0.4203,
+      "judge_overall_mean": 2.323,
+      "judge_groundedness": 2.0,
+      "judge_correctness": 2.23,
+      "judge_helpfulness": 2.53,
+      "judge_escalation": 2.533
+    }
+  },
+  "per_intent_metrics": {
+    "delivery_status_tracking": {
+      "precision": 0.7455,
+      "recall": 0.8039,
+      "f1": 0.7736,
+      "support": 51
+    },
+    "return_or_refund": {
+      "precision": 0.7826,
+      "recall": 0.72,
+      "f1": 0.75,
+      "support": 25
+    },
+    "damaged_or_missing_item": {
+      "precision": 0.8889,
+      "recall": 0.9412,
+      "f1": 0.9143,
+      "support": 17
+    },
+    "order_change_or_cancel": {
+      "precision": 0.7778,
+      "recall": 1.0,
+      "f1": 0.875,
+      "support": 7
+    },
+    "account_and_payment_security": {
+      "precision": 0.75,
+      "recall": 0.84,
+      "f1": 0.7925,
+      "support": 25
+    },
+    "prime_and_subscription": {
+      "precision": 0.9545,
+      "recall": 0.84,
+      "f1": 0.8936,
+      "support": 25
+    },
+    "technical_product_support": {
+      "precision": 0.85,
+      "recall": 0.68,
+      "f1": 0.7556,
+      "support": 25
+    },
+    "general_feedback_and_complaints": {
+      "precision": 0.88,
+      "recall": 0.88,
+      "f1": 0.88,
+      "support": 25
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "delivery_status_tracking",
+      "return_or_refund",
+      "damaged_or_missing_item",
+      "order_change_or_cancel",
+      "account_and_payment_security",
+      "prime_and_subscription",
+      "technical_product_support",
+      "general_feedback_and_complaints"
+    ],
+    "matrix": [
+      [
+        41,
+        2,
+        1,
+        0,
+        4,
+        0,
+        2,
+        1
+      ],
+      [
+        4,
+        18,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        0,
+        16,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        7,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        1,
+        0,
+        0,
+        21,
+        0,
+        0,
+        1
+      ],
+      [
+        2,
+        0,
+        0,
+        1,
+        1,
+        21,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        1,
+        0,
+        17,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        22
+      ]
+    ]
+  },
+  "judge_human_agreement": {
+    "pearson_correlation": 0.803,
+    "p_value": 0.0,
+    "mean_absolute_error": 0.3695,
+    "exact_agreement_pct": 15.0,
+    "within_half_point_agreement_pct": 85.0
+  }
+}

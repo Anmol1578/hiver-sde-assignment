@@ -1,0 +1,29 @@
+# Environments
+.venv/
+venv/
+ENV/
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Heavy raw data and temporary files
+data/raw/
+data/models/*.npy
+data/models/*.pkl
+
+# Keep golden sets and processed schemas tracked
+!data/golden/golden.jsonl
+!data/processed/intent_taxonomy.json
+
+# Environment variables
+.env
+
+# OS metadata
+.DS_Store
+Thumbs.db
+*.swp

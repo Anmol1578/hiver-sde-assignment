@@ -1,0 +1,130 @@
+"""
+Intent taxonomy discovery and definition module.
+Analyzes recurring customer problem patterns and defines a compact, actionable taxonomy.
+"""
+
+import json
+from pathlib import Path
+from typing import Dict, List, Any
+
+TAXONOMY_PATH = Path(__file__).resolve().parent.parent.parent / "data" / "processed" / "intent_taxonomy.json"
+
+INTENT_TAXONOMY: Dict[str, Dict[str, Any]] = {
+    "delivery_status_tracking": {
+        "description": "Inquiries regarding package shipping status, courier delays, expected delivery dates, or tracking updates.",
+        "risk_level": "low",
+        "default_action": "auto_handle",
+        "keywords": [
+            "deliver", "delivery", "track", "tracking", "courier", "package", "parcel", "shipment",
+            "shipped", "arrive", "arriving", "late", "delay", "carrier", "transit", "estimated",
+            "where is my", "dispatch", "dispatched", "usps", "ups", "fedex"
+        ],
+        "escalation_conditions": [
+            "Package marked delivered by carrier but customer claims not received",
+            "Delay exceeding severe threshold (>7 days) with courier unresponsive"
+        ]
+    },
+    "return_or_refund": {
+        "description": "Requests to return an item, inquiry about refund status, return shipping labels, or return policies.",
+        "risk_level": "medium",
+        "default_action": "auto_handle",
+        "keywords": [
+            "return", "refund", "money back", "returned", "returning", "reimburse", "reimbursement",
+            "send back", "return label", "drop off", "ups drop", "refund status", "credit back", "chargeback"
+        ],
+        "escalation_conditions": [
+            "Return completed over 14 business days ago but refund still not received",
+            "Non-returnable item dispute or seller refusal"
+        ]
+    },
+    "damaged_or_missing_item": {
+        "description": "Reports of damaged goods, broken items, missing components, empty boxes, or tampering.",
+        "risk_level": "high",
+        "default_action": "escalate_to_human",
+        "keywords": [
+            "damage", "damaged", "broken", "smashed", "shattered", "opened", "tampered", "missing item",
+            "empty box", "defective", "cracked", "torn", "box was empty", "missing pieces", "dented", "ruined"
+        ],
+        "escalation_conditions": [
+            "Opened or tampered package with missing high-value contents",
+            "Hazardous or broken glass/liquid condition requiring claims investigation"
+        ]
+    },
+    "order_change_or_cancel": {
+        "description": "Requests to cancel an order, modify quantity, change shipping address, or alter payment method.",
+        "risk_level": "low",
+        "default_action": "auto_handle",
+        "keywords": [
+            "cancel", "cancellation", "cancelling", "change address", "wrong address", "update address",
+            "modify order", "accidentally ordered", "ordered by mistake", "stop order", "change item"
+        ],
+        "escalation_conditions": [
+            "Order already in dispatch to wrong unauthorized address",
+            "System error preventing cancellation before shipping cutoff"
+        ]
+    },
+    "account_and_payment_security": {
+        "description": "Issues accessing Amazon account, two-factor authentication/OTP failures, unauthorized charges, or hacked accounts.",
+        "risk_level": "critical",
+        "default_action": "escalate_to_human",
+        "keywords": [
+            "hacked", "fraud", "unauthorized", "stolen", "charge", "charged", "billing", "otp", "2fa",
+            "password", "login", "log in", "sign in", "locked out", "close account", "card", "compromised",
+            "phishing", "scam", "suspicious"
+        ],
+        "escalation_conditions": [
+            "All unauthorized financial charges or suspected fraudulent account access",
+            "Account closure requests or security verification requiring authenticated agent"
+        ]
+    },
+    "prime_and_subscription": {
+        "description": "Questions and issues regarding Amazon Prime membership, renewals, unwanted subscription fees, student discounts, or Prime Video perks.",
+        "risk_level": "low",
+        "default_action": "auto_handle",
+        "keywords": [
+            "prime", "membership", "subscription", "annual fee", "prime video", "prime student",
+            "music unlimited", "kindle unlimited", "renew", "auto renew", "prime charge", "sub renewal"
+        ],
+        "escalation_conditions": [
+            "Unresolved dispute over unauthorized Prime subscription enrollment",
+            "Refund denial for unused Prime membership"
+        ]
+    },
+    "technical_product_support": {
+        "description": "Troubleshooting Amazon devices and digital services (Echo/Alexa, Fire TV Stick, Kindle e-reader, Fire Tablet, apps).",
+        "risk_level": "medium",
+        "default_action": "auto_handle",
+        "keywords": [
+            "echo", "alexa", "fire stick", "firetv", "kindle", "tablet", "device", "setup", "wifi",
+            "connect", "bluetooth", "update", "screen", "frozen", "app crash", "error code", "firmware",
+            "reboot", "restart", "sync"
+        ],
+        "escalation_conditions": [
+            "Device hardware failure persisting after full factory reset",
+            "Warranty replacement claim for defective electronic unit"
+        ]
+    },
+    "general_feedback_and_complaints": {
+        "description": "Customer service feedback, delivery driver misconduct, complaints regarding brand experience, or general praise/queries.",
+        "risk_level": "high",
+        "default_action": "escalate_to_human",
+        "keywords": [
+            "driver", "rude", "horrible", "terrible", "worst", "unacceptable", "complaint", "feedback",
+            "threw", "yelled", "unprofessional", "disgusted", "appalling", "manager", "supervisor",
+            "escalate", "agent", "human"
+        ],
+        "escalation_conditions": [
+            "Delivery driver misconduct, property damage, or safety complaints",
+            "Severe customer dissatisfaction after multiple failed interactions"
+        ]
+    }
+}
+
+def export_intent_taxonomy(output_path: Path = TAXONOMY_PATH):
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(INTENT_TAXONOMY, f, indent=2)
+    print(f"[Intent] Exported 8-class taxonomy to {output_path}")
+
+if __name__ == "__main__":
+    export_intent_taxonomy()
