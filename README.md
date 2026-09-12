@@ -197,6 +197,5 @@ hiver-sde-assignment/
 ---
 
 ## 7. Submission Details
-- **Submission Form:** [Hiver SDE Intern Submission Form](https://intelligent-bar-256.notion.site/39492cbf0da2800682cfc78a600a745f)
 - **Report Document:** [reports/report.md](reports/report.md)
 - **Candidate:** Anmol
